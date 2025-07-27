@@ -8,6 +8,7 @@ const CakeSection = ({ onNext }) => {
 
   const blowCandle = () => {
     setCandleBlown(true);
+    analyticsService.trackInteraction('cake_section', 'candle_blown');
     setTimeout(() => setShowWish(true), 1000);
   };
 
