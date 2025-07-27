@@ -8,6 +8,7 @@ const VirtualGiftBox = ({ onNext }) => {
 
   const openGift = () => {
     setGiftOpened(true);
+    analyticsService.trackInteraction('virtual_gift_box', 'gift_opened');
     setTimeout(() => setShowRewards(true), 1000);
   };
 
