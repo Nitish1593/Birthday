@@ -10,7 +10,10 @@ const SecretSection = ({ onNext }) => {
       {/* Secret heart in corner */}
       <div className="absolute top-6 right-6">
         <button
-          onClick={() => setSecretRevealed(true)}
+          onClick={() => {
+            setSecretRevealed(true);
+            analyticsService.trackInteraction('secret_section', 'secret_found');
+          }}
           className="text-4xl hover:scale-110 transition-transform duration-300 animate-pulse"
         >
           💖
