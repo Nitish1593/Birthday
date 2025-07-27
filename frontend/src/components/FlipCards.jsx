@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
+import analyticsService from "../utils/analytics";
 
 const FlipCards = ({ onNext }) => {
   const [flippedCards, setFlippedCards] = useState(new Set());
@@ -43,6 +44,8 @@ const FlipCards = ({ onNext }) => {
       newFlipped.delete(index);
     } else {
       newFlipped.add(index);
+      // Track card flip
+      analyticsService.trackInteraction('flip_cards', 'card_flip');
     }
     setFlippedCards(newFlipped);
   };
