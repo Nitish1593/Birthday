@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
+import analyticsService from "../utils/analytics";
 
 const CakeSection = ({ onNext }) => {
   const [candleBlown, setCandleBlown] = useState(false);
