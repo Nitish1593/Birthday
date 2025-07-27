@@ -40,7 +40,7 @@ const BirthdayWebsite = () => {
       {/* Floating Love Letter Button */}
       <button
         onClick={() => setShowLetter(true)}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-pink-400 to-purple-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 z-50"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-pink-400 to-purple-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 z-[9999]"
       >
         💌
       </button>
