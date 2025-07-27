@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
+import analyticsService from "../utils/analytics";
 
 const SecretSection = ({ onNext }) => {
   const [secretRevealed, setSecretRevealed] = useState(false);
