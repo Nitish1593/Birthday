@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import WelcomePage from "./WelcomePage";
 import HeartMessage from "./HeartMessage";
 import PromisePage from "./PromisePage";
@@ -18,8 +19,10 @@ import analyticsService from "../utils/analytics";
 const BirthdayWebsite = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [showLetter, setShowLetter] = useState(false);
+  const { user, logout, isKhushi } = useAuth();
 
-  const sections = [
+  // Sections available only to Khushi
+  const khushiSections = [
     { component: <WelcomePage onNext={() => setCurrentSection(1)} />, name: "welcome" },
     { component: <HeartMessage onNext={() => setCurrentSection(2)} />, name: "heart_message" },
     { component: <PromisePage onNext={() => setCurrentSection(3)} />, name: "promise" },
@@ -35,41 +38,54 @@ const BirthdayWebsite = () => {
     { component: <AnalyticsDashboard onNext={() => setCurrentSection(0)} />, name: "analytics" }
   ];
 
-  // Track section changes
-  useEffect(() => {
-    const sectionName = sections[currentSection]?.name;
-    if (sectionName) {
-      analyticsService.trackSectionView(sectionName);
-    }
-  }, [currentSection]);
+  const sections = isKhushi ? khushiSections : [];
 
-  // Handle love letter open
+  // Track section changes for Khushi only
+  useEffect(() => {
+    if (isKhushi) {
+      const sectionName = sections[currentSection]?.name;
+      if (sectionName) {
+        analyticsService.trackSectionView(sectionName);
+      }
+    }
+  }, [currentSection, isKhushi]);
+
+  // Handle love letter open for Khushi only
   const handleLoveLetterOpen = () => {
     setShowLetter(true);
-    analyticsService.trackLoveLetterOpen();
+    if (isKhushi) {
+      analyticsService.trackLoveLetterOpen();
+    }
   };
 
-  // Send visitor data when component unmounts
+  // Send visitor data when component unmounts (for Khushi only)
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      analyticsService.sendVisitorData();
-    };
+    if (isKhushi) {
+      const handleBeforeUnload = () => {
+        analyticsService.sendVisitorData();
+      };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      analyticsService.sendVisitorData();
-    };
-  }, []);
+      window.addEventListener('beforeunload', handleBeforeUnload);
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+        analyticsService.sendVisitorData();
+      };
+    }
+  }, [isKhushi]);
+
+  if (!isKhushi) {
+    // This should not happen as guests have their own component
+    return null;
+  }
 
   return (
     <div className="birthday-website">
-      {sections[currentSection].component}
+      {sections[currentSection]?.component}
       
-      {/* Global Love Letter Modal */}
+      {/* Global Love Letter Modal - Only for Khushi */}
       <LoveLetter show={showLetter} onClose={() => setShowLetter(false)} />
       
-      {/* Floating Love Letter Button */}
+      {/* Floating Love Letter Button - Only for Khushi */}
       <button
         onClick={handleLoveLetterOpen}
         className="fixed bottom-6 right-6 bg-gradient-to-r from-pink-400 to-purple-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 z-[9999]"
@@ -77,7 +93,7 @@ const BirthdayWebsite = () => {
         💌
       </button>
       
-      {/* Navigation dots */}
+      {/* Navigation dots - Only for Khushi */}
       <div className="fixed left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-50">
         {sections.map((_, index) => (
           <button
@@ -92,14 +108,27 @@ const BirthdayWebsite = () => {
         ))}
       </div>
 
-      {/* Analytics Button */}
+      {/* Analytics Button - Only for Khushi */}
       <button
         onClick={() => setCurrentSection(12)}
-        className="fixed top-6 right-6 bg-gradient-to-r from-purple-400 to-indigo-500 text-white p-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 z-50"
+        className="fixed top-6 right-20 bg-gradient-to-r from-purple-400 to-indigo-500 text-white p-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 z-50"
         title="View Analytics"
       >
         📊
       </button>
+
+      {/* Logout Button */}
+      <button
+        onClick={logout}
+        className="fixed top-6 right-6 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50"
+      >
+        Logout
+      </button>
+
+      {/* Welcome message for Khushi */}
+      <div className="fixed top-6 left-6 bg-pink-400 text-white px-4 py-2 rounded-full shadow-lg z-50">
+        Welcome back, {user?.name}! 💕
+      </div>
     </div>
   );
 };
