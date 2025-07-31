@@ -121,6 +121,70 @@
     animation: float 3s ease-in-out infinite;
 }
 
+/* Cake cutting animation */
+@keyframes cake-cut {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.cake-cut-animation {
+    animation: cake-cut 0.8s ease-in-out;
+}
+
+/* Celebration particles */
+@keyframes celebration-float {
+    0% { 
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.celebration-particle {
+    animation: celebration-float 3s linear infinite;
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+    0%, 100% { 
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+.animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Memory lane image hover effect */
+.memory-image {
+    transition: all 0.3s ease;
+}
+
+.memory-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Things you love hover effect */
+.love-item-image {
+    transition: all 0.3s ease;
+    border-radius: 16px;
+}
+
+.love-item-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+}
+
 /* Smooth transitions */
 * {
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
@@ -135,4 +199,14 @@ button:focus {
 ::selection {
     background-color: #ec4899;
     color: white;
+}
+
+/* Image loading animation */
+@keyframes image-fade-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.image-fade-in {
+    animation: image-fade-in 0.5s ease-out;
 }

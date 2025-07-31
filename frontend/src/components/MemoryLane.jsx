@@ -7,34 +7,28 @@ const MemoryLane = ({ onNext }) => {
 
   const memories = [
     {
-      image: "📱",
-      title: "First Long Chat",
-      description: "This was the day I realized how important you are.",
-      date: "A day I'll never forget"
+      image: "https://customer-assets.emergentagent.com/job_sweet-promise/artifacts/yl6sb1gr_Khushi.jpg",
+      title: "Beautiful Khushi",
+      description: "This was the day I realized how beautiful and amazing you are.",
+      date: "A moment to remember"
     },
     {
-      image: "😊",
-      title: "Your Cute Moment",
-      description: "You looked so cute here 🥺",
+      image: "https://customer-assets.emergentagent.com/job_sweet-promise/artifacts/3uspezol_Khushi_2.jpg",
+      title: "Happy Moments",
+      description: "Your smile always lights up every moment 🥺",
       date: "Perfect timing"
     },
     {
-      image: "🍛",
-      title: "Pav Bhaji Discovery",
-      description: "The day I learned about your favorite food!",
-      date: "Food bonding"
+      image: "https://customer-assets.emergentagent.com/job_sweet-promise/artifacts/6j9ucwf7_khushi_img.jpg",
+      title: "Sweet Memories",
+      description: "Every photo tells a story of happiness",
+      date: "Precious moments"
     },
     {
-      image: "💕",
-      title: "Heart to Heart",
-      description: "When we talked about everything and nothing",
-      date: "Connection moment"
-    },
-    {
-      image: "🎈",
-      title: "Birthday Planning",
-      description: "When I decided to make this surprise for you",
-      date: "The beginning of this"
+      image: "https://customer-assets.emergentagent.com/job_sweet-promise/artifacts/47evcnbx_kb.jpg",
+      title: "Childhood Cuteness",
+      description: "You were adorable then, and you're amazing now!",
+      date: "Throwback love"
     }
   ];
 
@@ -61,15 +55,19 @@ const MemoryLane = ({ onNext }) => {
 
         <div className="relative">
           {/* Main Memory Display */}
-          <div className="bg-white/40 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-rose-200 min-h-[400px] flex items-center justify-center">
+          <div className="bg-white/40 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-rose-200 min-h-[500px] flex items-center justify-center">
             <div className="text-center">
-              <div className="text-8xl mb-6 animate-pulse">
-                {memories[currentMemory].image}
+              <div className="w-80 h-80 mx-auto mb-6 rounded-3xl overflow-hidden shadow-lg">
+                <img 
+                  src={memories[currentMemory].image} 
+                  alt={memories[currentMemory].title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
               </div>
               <h3 className="text-3xl font-bold text-rose-600 mb-4">
                 {memories[currentMemory].title}
               </h3>
-              <p className="text-lg text-gray-700 mb-4 italic">
+              <p className="text-lg text-gray-700 mb-4 italic max-w-md mx-auto">
                 {memories[currentMemory].description}
               </p>
               <div className="text-sm text-rose-500 font-medium">
@@ -117,9 +115,6 @@ const MemoryLane = ({ onNext }) => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-600 italic mb-6">
-            *Photos will be added soon - this is just the beginning of our memory collection!*
-          </p>
           <Button
             onClick={onNext}
             className="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white px-10 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"

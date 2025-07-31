@@ -5,12 +5,36 @@ const ThingsYouLove = ({ onNext }) => {
   const [visibleItems, setVisibleItems] = useState(0);
 
   const loveItems = [
-    { emoji: "🍛", text: "Pav Bhaji", description: "Your absolute favorite!" },
-    { emoji: "🍫", text: "Chocolates", description: "Sweet like you" },
-    { emoji: "🧸", text: "Cute Moments", description: "Making memories" },
-    { emoji: "🫂", text: "Caring Talks", description: "Heart to heart" },
-    { emoji: "📱", text: "Long Chats", description: "Hours fly by" },
-    { emoji: "🌸", text: "Beautiful Things", description: "Just like you" }
+    { 
+      image: "https://images.unsplash.com/photo-1626132647523-66f5bf380027?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxwYXYlMjBiaGFqaXxlbnwwfHx8fDE3NTM5NTQxNTF8MA&ixlib=rb-4.1.0&q=85",
+      text: "Pav Bhaji", 
+      description: "Your absolute favorite!" 
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1610450949065-1f2841536c88?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxjaG9jb2xhdGV8ZW58MHx8fHwxNzUzOTU0MTYyfDA&ixlib=rb-4.1.0&q=85",
+      text: "Chocolates", 
+      description: "Sweet like you" 
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHx0ZWRkeSUyMGJlYXJ8ZW58MHx8fHwxNzUzOTU0MTY3fDA&ixlib=rb-4.1.0&q=85",
+      text: "Cute Moments", 
+      description: "Making memories" 
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1598965402089-897ce52e8355?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwzfHxzbWFydHBob25lfGVufDB8fHx8MTc1Mzk1NDE3M3ww&ixlib=rb-4.1.0&q=85",
+      text: "Caring Talks", 
+      description: "Heart to heart" 
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxzbWFydHBob25lfGVufDB8fHx8MTc1Mzk1NDE3M3ww&ixlib=rb-4.1.0&q=85",
+      text: "Long Chats", 
+      description: "Hours fly by" 
+    },
+    { 
+      image: "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxmbG93ZXJ8ZW58MHx8fHwxNzUzOTU0MTc4fDA&ixlib=rb-4.1.0&q=85",
+      text: "Beautiful Things", 
+      description: "Just like you" 
+    }
   ];
 
   useEffect(() => {
@@ -48,10 +72,15 @@ const ThingsYouLove = ({ onNext }) => {
                   : 'opacity-0 translate-y-10 scale-95'
               }`}
             >
-              <div className="bg-white/40 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl border border-pink-200 hover:border-pink-300 transition-all duration-300 group">
+              <div className="bg-white/40 backdrop-blur-sm rounded-3xl p-6 shadow-lg hover:shadow-xl border border-pink-200 hover:border-pink-300 transition-all duration-300 group">
                 <div className="text-center">
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {item.emoji}
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                    <img 
+                      src={item.image} 
+                      alt={item.text}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                   <h3 className="text-2xl font-bold text-pink-600 mb-2">
                     {item.text}
